@@ -5,6 +5,7 @@ __pycache__/
 logging_config.yaml
 
 # Plain
+**/build/
 **/plain_modules/
 **/conformance_tests/
 **/node_plain_modules/

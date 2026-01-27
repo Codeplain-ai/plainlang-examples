@@ -18,7 +18,7 @@ fi
 
 current_dir=$(pwd)
 
-GO_BUILD_SUBFOLDER=go_$1
+GO_BUILD_SUBFOLDER=".tmp/$1"
 
 if [ "${VERBOSE:-}" -eq 1 ] 2>/dev/null; then
   printf "Preparing Go build subfolder: $GO_BUILD_SUBFOLDER\n"
