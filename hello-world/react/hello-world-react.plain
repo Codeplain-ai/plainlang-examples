@@ -1,0 +1,11 @@
+---
+description: '"hello, world" in Plain (React version)'
+import:
+  - typescript-react-app-template
+requires:
+  - typescript-react-app-boilerplate
+---
+
+***functional specs***
+
+- Display "hello, world"

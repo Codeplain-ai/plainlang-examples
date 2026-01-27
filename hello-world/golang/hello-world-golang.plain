@@ -1,0 +1,13 @@
+---
+description: '"hello, world" in Plain (Go lang version)'
+import:
+  - golang-console-app-template
+---
+
+***technical specs***
+
+- :MainExecutableFile: of :App: should be called "hello_world.go".
+
+***functional specs***
+
+- Display "hello, world"

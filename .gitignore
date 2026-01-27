@@ -1,0 +1,14 @@
+.DS_Store
+__pycache__/
+
+# Local files
+logging_config.yaml
+
+# Plain
+**/plain_modules/
+**/conformance_tests/
+**/node_plain_modules/
+**/node_conformance_tests/
+**/go_plain_modules/
+**/python_plain_modules/
+**/codeplain.log

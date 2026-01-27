@@ -1,0 +1,75 @@
+modal_specification:
+  modal_overview:
+    name: "Add New Task Modal"
+    purpose: "Allows users to add a new task with details including name, description, and due date."
+
+  modal_structure:
+    modal_container:
+      size: "Centered, 50% of screen or max 600px"
+      background: "#ffffff"
+      border: "Rounded edges with subtle shadow"
+      close_icon:
+        type: "'X' icon"
+        size: "16px x 16px"
+        function: "Closes the modal without saving changes"
+
+    header_section:
+      title:
+        text: "Add New Task"
+        font: "Sans-serif, bold, size: 24px"
+        position: "Top-centered"
+
+    input_fields:
+      task_name_field:
+        label: "Task name"
+        type: "Text input"
+        placeholder: "Name"
+        font: "Sans-serif, regular, size: 16px"
+        border: "1px solid #ccc with rounded edges"
+      description_field:
+        label: "Description"
+        type: "Multiline text area"
+        placeholder: "This is..."
+        font: "Sans-serif, regular, size: 16px"
+        border: "1px solid #ccc with rounded edges"
+      due_date_field:
+        label: "Due Date"
+        type: "Date input"
+        default_value: "Current date"
+        font: "Sans-serif, regular, size: 16px"
+        border: "1px solid #ccc with rounded edges"
+
+  action_buttons:
+    cancel_button:
+      label: "Cancel"
+      style:
+        background: "#ccc"
+        text_color: "#000"
+      function: "Closes the modal without saving changes"
+    save_button:
+      label: "Save"
+      style:
+        background: "#000"
+        text_color: "#fff"
+      function: "Saves the task and closes the modal"
+
+  styling_details:
+    font_family: "Sans-serif (e.g., Arial, Helvetica)"
+    color_palette:
+      modal_background: "#ffffff"
+      button_colors:
+        save: "#000"
+        cancel: "#ccc"
+      text_color: "#212529"
+    spacing: "Consistent 16px margin between elements"
+    box_shadow: "0 4px 8px rgba(0, 0, 0, 0.1)"
+
+  behavior_and_interactions:
+    close_icon:
+      function: "Closes the modal without saving"
+    cancel_button:
+      function: "Closes the modal without saving"
+    save_button:
+      function: "Validates inputs, saves task, and closes modal"
+    input_fields:
+      behavior: "Standard input and date picker functionality"
