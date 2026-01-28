@@ -1,3 +1,5 @@
-verbose: true
 unittests-script: ../../scripts/run_unittests_golang.sh
 conformance-tests-script: ../../scripts/run_conformance_tests_golang.sh
+copy-build: true
+build-dest: build
+verbose: true  # verbose flag, defaults to false if not set
