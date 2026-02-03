@@ -1,4 +1,4 @@
-# How to run the example
+# How to render the example
 
 You can run the example with the `codeplain` command:
 
@@ -6,10 +6,12 @@ You can run the example with the `codeplain` command:
 codeplain hello-world-golang.plain
 ```
 
+# How to run the generated code
+
 After the rendering is finished, you can run the generated software code using the command:
 
 ```bash
-go run hello_world
+go run build/hello_world
 ```
 
 See [top-level README](../../README.md) for additional information and help for troubleshooting the examples.
