@@ -4,9 +4,17 @@ import:
   - python-console-app-template
 ---
 
+***definitions***
+> There are no additional definitions needed in this module.
+> For the definitions of :App: and other imported concepts,
+> check https://github.com/Codeplain-ai/codeplain/tree/main/standard_template_library
+
 ***technical specs***
 
 - :MainExecutableFile: of :App: should be called "hello_world.py".
+
+***test specs***
+> Test specs are defined in the import.
 
 ***functional specs***
 
