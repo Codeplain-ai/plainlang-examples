@@ -9,11 +9,11 @@ import:
 > For the definitions of :App: and other imported concepts,
 > check https://github.com/Codeplain-ai/codeplain/tree/main/standard_template_library
 
-***technical specs***
+***implementation reqs***
 
 - :MainExecutableFile: of :App: should be called "hello_world.py".
 
-***test specs***
+***test reqs***
 > Test specs are defined in the import.
 
 ***functional specs***
