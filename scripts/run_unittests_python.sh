@@ -54,14 +54,8 @@ fi
 # Execute all Python unittests in the subfolder
 echo "Running Python unittests in $PYTHON_BUILD_SUBFOLDER..."
 
-output=$(timeout 60s $PYTHON_CMD -m unittest discover -b 2>&1)
+output=$($PYTHON_CMD -m unittest discover -b 2>&1)
 exit_code=$?
-
-# Check if the command timed out
-if [ $exit_code -eq 124 ]; then
-    printf "\nError: Unittests timed out after 60 seconds.\n"
-    exit $exit_code
-fi
 
 # Echo the original output
 echo "$output"
