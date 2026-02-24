@@ -244,7 +244,13 @@ if [ "${VERBOSE:-}" -eq 1 ] 2>/dev/null; then
   printf "Running Cypress conformance tests...\n"
 fi
 
-BROWSERSLIST_IGNORE_OLD_DATA=1 npx cypress run --browser=chrome --config video=false 2>/dev/null
+cypress_info_output=$(npx cypress info 2>/dev/null)
+if printf "%s" "$cypress_info_output" | grep -qi "chrome"; then
+  CYPRESS_BROWSER_FLAG="--browser=chrome"
+fi
+echo "CYPRESS_BROWSER_FLAG: ${CYPRESS_BROWSER_FLAG:-none}"
+
+BROWSERSLIST_IGNORE_OLD_DATA=1 npx cypress run ${CYPRESS_BROWSER_FLAG:-} --config video=false 2>/dev/null
 cypress_run_result=$?
 
 if [ $cypress_run_result -ne 0 ]; then
