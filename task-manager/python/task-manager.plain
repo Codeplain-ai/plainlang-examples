@@ -1,4 +1,5 @@
 ---
+description: 'A task manager application'
 import:
   - python-console-app-template
 ---
