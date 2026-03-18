@@ -60,9 +60,6 @@ cleanup() {
             printf "React app is terminated!\n"
         fi
     fi
-
-    # Remove temporary files if they exist
-    [ -f "$build_output" ] && rm "$build_output" 2>/dev/null
 }
 
 # Set up trap to call cleanup function on script exit, interrupt, or termination
@@ -142,18 +139,12 @@ if [ "${VERBOSE:-}" -eq 1 ] 2>/dev/null; then
   printf "Building the application...\n"
 fi
 
-build_output=$(mktemp)
-
-npm run build --loglevel silent > "$build_output" 2>&1
-
-if [ $? -ne 0 ]; then
-  printf "Error: Building application.\n"
-  cat "$build_output"
-  rm "$build_output"
-  exit 2
+if ! npm run build --loglevel silent > /dev/null 2>&1; then
+  if ! npm run build 2>&1; then
+    printf "Error: Building application.\n"
+    exit 2
+  fi
 fi
-
-rm "$build_output"
 
 if [ "${VERBOSE:-}" -eq 1 ] 2>/dev/null; then
   printf "Starting the application...\n"
