@@ -144,7 +144,7 @@ fi
 
 build_output=$(mktemp)
 
-npm run build --loglevel silent > "$build_output" 2>&1
+npm run build > "$build_output" 2>&1
 
 if [ $? -ne 0 ]; then
   printf "Error: Building application.\n"
