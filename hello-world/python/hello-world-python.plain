@@ -1,20 +1,22 @@
 ---
 description: '"hello, world" in Plain (Python version)'
 import:
-  - python-console-app-template
+  - python-console-app-template # spec source available at https://github.com/Codeplain-ai/codeplain/blob/main/standard_template_library/
 ---
+
+> Comments in ***plain are for human readers only and should start with '>' character.
 
 ***definitions***
 > There are no additional definitions needed in this module.
 > For the definitions of :App: and other imported concepts,
-> check https://github.com/Codeplain-ai/codeplain/tree/main/standard_template_library
+> check 'python-console-app-template'.
 
 ***implementation reqs***
 
 - :MainExecutableFile: of :App: should be called "hello_world.py".
 
 ***test reqs***
-> Test specs are defined in the import.
+> Test requirements are defined in 'python-console-app-template'.
 
 ***functional specs***
 
@@ -25,3 +27,7 @@ import:
   - :App: should exit with status code 0 indicating successful execution.
 
   - :App: should complete execution in under 1 second.
+
+
+
+> see https://www.plainlang.org/ for more information on ***plain
