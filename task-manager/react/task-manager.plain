@@ -1,8 +1,8 @@
 ---
 import:
-  - typescript-react-app-template
+  - typescript-react-app-template # spec source available at https://github.com/Codeplain-ai/codeplain/blob/main/standard_template_library/
 requires:
-  - typescript-react-app-boilerplate
+  - typescript-react-app-boilerplate # spec source available at https://github.com/Codeplain-ai/codeplain/blob/main/standard_template_library/
 ---
 
 ***definitions***
@@ -17,6 +17,12 @@ requires:
 - :TaskList: is a list of :Task: items.
   - Initially :TaskList: should be empty.
 
+***implementation reqs***
+> Implementation requirements are defined in 'typescript-react-app-template'.
+
+***test reqs***
+> Test requirements are defined in 'typescript-react-app-template'.
+
 ***functional specs***
 
 - Show header of :App:. The details of the user interface are provided in the file [task_list_ui_specification.yaml](task_list_ui_specification.yaml).
@@ -30,3 +36,7 @@ requires:
 - :User: should be able to edit :Task:
 
 - :User: should be able to mark :Task: as completed.
+
+
+
+> see https://www.plainlang.org/ for more information on ***plain

@@ -1,13 +1,27 @@
 ---
 description: '"hello, world" in Plain (Go lang version)'
 import:
-  - golang-console-app-template
+  - golang-console-app-template # spec source available at https://github.com/Codeplain-ai/codeplain/blob/main/standard_template_library/
 ---
+
+> Comments in ***plain are for human readers only and should start with '>' character.
+
+***definitions***
+> There are no additional definitions needed in this module.
+> For the definitions of :App: and other imported concepts,
+> check 'golang-console-app-template'.
 
 ***implementation reqs***
 
 - :MainExecutableFile: of :App: should be called "hello_world.go".
 
+***test reqs***
+> Test requirements are defined in 'golang-console-app-template'.
+
 ***functional specs***
 
 - Display "hello, world"
+
+
+
+> see https://www.plainlang.org/ for more information on ***plain
