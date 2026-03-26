@@ -11,6 +11,8 @@ hello-world/
   golang/
   python/
   react/
+pong/
+  python/
 task-manager/
   react/
 ```
