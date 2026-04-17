@@ -1,0 +1,4 @@
+unittests-script: ../../scripts/run_unittests_flutter.sh
+copy-build: true
+build-dest: build
+verbose: true  # verbose flag, defaults to false if not set
