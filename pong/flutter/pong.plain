@@ -1,0 +1,44 @@
+---
+description: 'Pong implemented in Dart with Flutter'
+---
+
+***definitions***
+
+- :GameTitle: game title should be `Pong`.
+
+***implementation reqs***
+
+- :Implementation: should be in Dart using the Flutter framework.
+- :Implementation: should use a single-screen Flutter app with a CustomPainter-based game canvas rendered via a GameWidget.
+- :Implementation: should use a fixed 60 FPS game loop driven by a Ticker.
+- :Implementation: should target iOS and Android platforms.
+- :Implementation: should handle touch input via GestureDetector and accelerometer input via the sensors_plus package.
+- :Implementation: should include unit tests using the flutter_test package.
+
+***test reqs***
+- :ConformanceTests: should be implemented using the flutter_test package and will be run using "flutter test" command.
+
+***functional specs***
+
+- Lock the screen orientation to landscape mode. Create a full-screen game view and set the app title to :GameTitle:.
+
+- Draw 2 rectangles, one for each player. One on the left and one on the right side of the screen. Both paddles are inset from the screen edge by a finger's width (approximately 48 logical pixels) to avoid overlap with device notches and safe area insets.
+
+- Create a square ball, that starts in the center of the screen and starts moving in a random direction.
+    - Random direction can be about 30deg up/down from horizon in both directions
+    - The ball should bounce off the top and bottom edges of the screen
+    - The ball should bounce off the player paddles 
+    - If the paddles are moving, add 60% of that movement to the ball's velocity to make it veer off from the perfect bounce.
+
+- Create scoring mechanism that displays numbers at the top of the screen
+    - Score increases when the ball goes into the opponent's "goal" (off the screen on their side).
+
+- The game has two modes selectable from the start screen: "vs Computer" and "vs Player". Player 1 (left paddle) is always controlled by dragging a finger vertically on the left half of the screen; the paddle follows the finger's vertical position directly.
+    - In "vs Computer" mode, Player 2 (right paddle) is controlled by the computer. The computer tracks the ball's vertical position and moves its paddle toward it at a speed slightly slower than the ball, so it is beatable. The computer paddle movement should have a small random reaction delay to feel natural.
+    - In "vs Player" mode, Player 2 (right paddle) is controlled by a second human by tilting the phone forward and backward to move the paddle up and down.
+
+- At the beginning of the game, show mode selection buttons ("vs Computer" and "vs Player") together with instructions how to play the game. Tapping a mode button starts the game in that mode. When the game is over, show "You win! Tap to restart" or "Computer wins! Tap to restart" in "vs Computer" mode, or "Player 1 wins! Tap to restart" or "Player 2 wins! Tap to restart" in "vs Player" mode. 
+
+- A player can restart the game by double tapping the screen. When the player restarts the game, show a pop up message "Restart the game. Tap to restart".
+
+- Treat the paddle like a reflective surface where the center produces a flat bounce, and hits above or below the center add upward or downward angle respectively, with a capped maximum angle.
