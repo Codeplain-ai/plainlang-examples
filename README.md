@@ -13,6 +13,7 @@ hello-world/
   react/
 pong/
   python/
+  flutter/
 task-manager/
   react/
 ```

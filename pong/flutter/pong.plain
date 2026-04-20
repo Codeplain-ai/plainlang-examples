@@ -1,22 +1,12 @@
 ---
 description: 'Pong implemented in Dart with Flutter'
+import:
+  - flutter-mobile-app-template
 ---
 
 ***definitions***
 
 - :GameTitle: game title should be `Pong`.
-
-***implementation reqs***
-
-- :Implementation: should be in Dart using the Flutter framework.
-- :Implementation: should use a single-screen Flutter app with a CustomPainter-based game canvas rendered via a GameWidget.
-- :Implementation: should use a fixed 60 FPS game loop driven by a Ticker.
-- :Implementation: should target iOS and Android platforms.
-- :Implementation: should handle touch input via GestureDetector and accelerometer input via the sensors_plus package.
-- :Implementation: should include unit tests using the flutter_test package.
-
-***test reqs***
-- :ConformanceTests: should be implemented using the flutter_test package and will be run using "flutter test" command.
 
 ***functional specs***
 
