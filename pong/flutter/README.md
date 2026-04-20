@@ -13,7 +13,11 @@ codeplain pong.plain
 After the rendering is finished, you can run the generated software code using the command:
 
 ```bash
-python3 build/pong.py
+flutter run
 ```
 
 See [top-level README](../../README.md) for additional information and help for troubleshooting the examples.
+
+# Credits
+
+The initial version of this Pong implementation in ***plain was developed by [Gašper Zgonec](https://github.com/gasperzgonec).
