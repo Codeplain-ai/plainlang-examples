@@ -8,11 +8,17 @@ import:
 
 - :GameTitle: game title should be `Pong`.
 
+- :Paddle: is a player-controlled rectangular game object.
+
+- :Paddles: are the two :Paddle: objects, one on the left side of the screen and one on the right side of the screen.
+
 ***implementation reqs***
 
 - :MainExecutableFile: of :App: should be called "pong.py".
 
 - Use curses library.
+
+- The game loop must use non-blocking or bounded-wait input handling and maintain a consistent frame rate suitable for real-time play.
 
 ***test reqs***
 
@@ -26,19 +32,21 @@ import:
 
 - Create a window 800x600 and name it :GameTitle:.
 
-- Draw 2 rectangles, one for each player. One on the left and one on the right side of the screen.
+- Draw :Paddles:, one for each player, with one on the left side of the screen and one on the right side of the screen.
+  - :Paddles: must remain fully visible within the playfield at all times and must be able to move all the way to the top and bottom bounds of the window.
 
 - Create a square ball, that starts in the center of the screen and starts moving in a random direction.
     - Random direction can be about 30deg up/down from horizon in both directions
     - The ball should bounce off the top and bottom edges of the screen
-    - The ball should bounce off the player paddles 
-    - If the paddles are moving, add 60% of that movement to the ball's velocity to make it veer off from the perfect bounce.
+    - The ball should bounce off :Paddle: of the player 
+    - If :Paddle: is moving, add 60% of that movement to the ball's velocity to make it veer off from the perfect bounce.
 
 - Create scoring mechanism that displays numbers at the top of the screen
     - Score increases when the ball goes into the opponent's "goal" (off the screen on their side).
 
-- Player can control the paddles using (W, S - player 1; O, L (or arrow up/down) - player 2).
+- Player can control :Paddle: using (W, S - player 1; O, L (or arrow up/down) - player 2).
+  - The implementation must provide responsive real-time controls for all supported keys, including arrow keys, without added input delay from terminal escape-sequence handling.
 
 - At the beginning of the game, show a "Press any key to start" message together with instructions how to play the game. When the game is over, show a "Player X wins! Press any key to restart" message.
 
-- Treat the paddle like a reflective surface where the center produces a flat bounce, and hits above or below the center add upward or downward angle respectively, with a capped maximum angle.
+- Treat :Paddle: like a reflective surface where the center produces a flat bounce, and hits above or below the center add upward or downward angle respectively, with a capped maximum angle.
