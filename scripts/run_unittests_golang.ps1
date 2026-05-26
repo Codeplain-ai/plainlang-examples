@@ -1,4 +1,5 @@
 #!/usr/bin/env pwsh
+
 $ErrorActionPreference = 'Stop'
 
 $UNRECOVERABLE_ERROR_EXIT_CODE = 69
@@ -12,7 +13,7 @@ if (-not $args[0]) {
 
 $BuildFolder = $args[0]
 
-$GO_BUILD_SUBFOLDER = ".tmp/$BuildFolder"
+$GO_BUILD_SUBFOLDER = Join-Path ([System.IO.Path]::GetTempPath()) "go_$(Split-Path $BuildFolder -Leaf)"
 
 if ($env:VERBOSE -eq "1") {
     Write-Host "Preparing Go build subfolder: $GO_BUILD_SUBFOLDER"
@@ -46,11 +47,25 @@ Push-Location $GO_BUILD_SUBFOLDER
 
 try {
     Write-Host "Running go get..."
-    go get
+    # Temporarily allow stderr output without throwing (Go tools write to stderr)
+    # ForEach-Object converts ErrorRecord objects (from stderr) to plain strings to avoid verbose error formatting
+    $ErrorActionPreference = 'Continue'
+    $output = go get 2>&1 | ForEach-Object { if ($_ -is [System.Management.Automation.ErrorRecord]) { $_.Exception.Message } else { $_ } } | Out-String
+    $ErrorActionPreference = 'Stop'
+    if ($output.Trim()) { Write-Host $output }
 
     # Execute all Golang unittests in the subfolder
     Write-Host "Running Golang unittests in $BuildFolder..."
-    go test
+    $ErrorActionPreference = 'Continue'
+    $output = go test 2>&1 | ForEach-Object { if ($_ -is [System.Management.Automation.ErrorRecord]) { $_.Exception.Message } else { $_ } } | Out-String
+    $exit_code = $LASTEXITCODE
+    $ErrorActionPreference = 'Stop'
+
+    Write-Host $output
+    exit $exit_code
 } finally {
     Pop-Location
+    if (Test-Path $GO_BUILD_SUBFOLDER) {
+        Remove-Item -Path $GO_BUILD_SUBFOLDER -Recurse -Force -ErrorAction SilentlyContinue
+    }
 }
