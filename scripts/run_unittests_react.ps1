@@ -1,4 +1,5 @@
 #!/usr/bin/env pwsh
+
 $ErrorActionPreference = 'Stop'
 
 $UNRECOVERABLE_ERROR_EXIT_CODE = 69
@@ -16,7 +17,7 @@ if (-not $args[0]) {
 $BuildFolder = $args[0]
 
 # Define the path to the subfolder
-$NODE_SUBFOLDER = ".tmp/$BuildFolder"
+$NODE_SUBFOLDER = Join-Path ([System.IO.Path]::GetTempPath()) "node_$(Split-Path $BuildFolder -Leaf)"
 
 if ($env:VERBOSE -eq "1") {
     Write-Host "Preparing Node subfolder: $NODE_SUBFOLDER"
@@ -59,8 +60,12 @@ try {
 
     # Execute all React unittests in the subfolder
     Write-Host "Running React unittests in $BuildFolder..."
-    $output = npm test -- --runInBand --silent --detectOpenHandles 2>&1 | Out-String
+    # Temporarily allow stderr output without throwing (npm/jest may write to stderr)
+    # ForEach-Object converts ErrorRecord objects (from stderr) to plain strings to avoid verbose error formatting
+    $ErrorActionPreference = 'Continue'
+    $output = npm test -- --runInBand --silent --detectOpenHandles 2>&1 | ForEach-Object { if ($_ -is [System.Management.Automation.ErrorRecord]) { $_.Exception.Message } else { $_ } } | Out-String
     $TEST_EXIT_CODE = $LASTEXITCODE
+    $ErrorActionPreference = 'Stop'
 
     # Strip ANSI escape codes
     $output = $output -replace $ANSI_ESCAPE_PATTERN, ''
@@ -75,4 +80,7 @@ try {
     exit $TEST_EXIT_CODE
 } finally {
     Pop-Location
+    if (Test-Path $NODE_SUBFOLDER) {
+        Remove-Item -Path $NODE_SUBFOLDER -Recurse -Force -ErrorAction SilentlyContinue
+    }
 }

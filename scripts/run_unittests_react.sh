@@ -17,7 +17,9 @@ if [ -z "$1" ]; then
 fi
 
 # Define the path to the subfolder
-NODE_SUBFOLDER=".tmp/$1"
+NODE_SUBFOLDER="/tmp/node_$(basename "$1")"
+
+trap 'rm -rf "$NODE_SUBFOLDER"' EXIT
 
 if [ "${VERBOSE:-}" -eq 1 ] 2>/dev/null; then
   printf "Preparing Node subfolder: $NODE_SUBFOLDER\n"
@@ -45,6 +47,7 @@ cp -R $1/* $NODE_SUBFOLDER
 cd "$NODE_SUBFOLDER" 2>/dev/null
 
 if [ $? -ne 0 ]; then
+  clear
   echo "Error: Subfolder '$1' does not exist."
   exit $UNRECOVERABLE_ERROR_EXIT_CODE
 fi
