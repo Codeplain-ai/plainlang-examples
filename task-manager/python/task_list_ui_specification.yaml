@@ -1,0 +1,88 @@
+functional_specification:
+  page_overview:
+    name: "Task List App"
+    purpose: "A terminal-based user interface for managing tasks, allowing users to view, add, edit, and delete tasks."
+
+  page_structure:
+    header_section:
+      title:
+        text: "Task List App"
+        text_style: "bold"
+        position: "Top of the page, left-aligned"
+      menu_icon:
+        text_style: "standout"
+        function: "Opens a side navigation panel (not in scope for this UI)"
+
+    main_content:
+      main_title:
+        text: "Task List"
+        text_style: "bold"
+        position: "Left-aligned below the header"
+      subtitle:
+        text: "All of your tasks in one place."
+        text_style: "dim"
+        position: "Below the main title"
+        emphasis: "secondary supporting text"
+
+  task_list_container:
+    layout: "Vertical list with space between task items"
+    task_item_structure:
+      container:
+        border: "Single-line terminal border"
+        spacing: "One blank line between task items"
+        padding: "1 character cell inside each bordered panel"
+      checkbox:
+        type: "Standard"
+        function: "Marks the task as completed when checked"
+        position: "Left-aligned within the card"
+      task_title:
+        placeholder: "Task Title"
+        text_style: "bold"
+        position: "Right of the checkbox"
+      description:
+        placeholder: "Body text for whatever you'd like to say. Add main task description."
+        text_style: "normal"
+        position: "Below the task title"
+      date:
+        format: "d. MMM (e.g., '9. Oct')"
+        text_style: "dim"
+        position: "Below the description, right-aligned"
+      edit_icon:
+        type: "Pencil icon"
+        text_style: "highlighted action"
+        position: "Right side of the card"
+        function: "Opens the task editing modal"
+      delete_icon:
+        type: "Trash can icon"
+        text_style: "highlighted action"
+        position: "Next to the edit icon"
+        function: "Deletes the task after a confirmation"
+
+  add_task_button:
+    label: "Add New Task"
+    style:
+      text_style: "reverse bold"
+      decoration: "Bracketed or bordered label"
+      emphasis: "primary action"
+    size: "Content-width with padding"
+    position: "Top right corner of the main content section"
+    function: "Opens a modal or form for adding a new task"
+
+  styling_details:
+    hierarchy:
+      primary_headings: "bold"
+      secondary_text: "dim"
+      metadata: "dim"
+      primary_actions: "reverse bold"
+    border_style: "Single-line box drawing characters where supported"
+    spacing: "One blank line between major sections and task items"
+
+  behavior_and_interactions:
+    checkbox_interaction:
+      function: "Toggles the completed state and changes the appearance (e.g., completed marker and dimmed task title)"
+    edit_icon:
+      function: "Opens a modal allowing users to edit the task details"
+    delete_icon:
+      function: "Opens a confirmation dialog before deletion"
+    add_task_button:
+      function: "Opens a modal or form to add a new task"

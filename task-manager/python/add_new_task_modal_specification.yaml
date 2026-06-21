@@ -1,0 +1,74 @@
+modal_specification:
+  modal_overview:
+    name: "Add New Task Modal"
+    purpose: "A terminal-based user interface for adding a new task with details including name, description, and due date."
+
+  modal_structure:
+    modal_container:
+      size: "Centered dialog sized to content within the terminal viewport"
+      background: "Terminal default background"
+      border: "Single-line terminal border"
+      close_icon:
+        type: "'X' icon"
+        text_style: "highlighted action"
+        function: "Closes the modal without saving changes"
+
+    header_section:
+      title:
+        text: "Add New Task"
+        text_style: "bold"
+        position: "Top-centered"
+
+    input_fields:
+      task_name_field:
+        label: "Task name"
+        type: "Text input"
+        placeholder: "Name"
+        text_style: "normal"
+        border: "Single-line input boundary or underline"
+      description_field:
+        label: "Description"
+        type: "Multiline text area"
+        placeholder: "This is..."
+        text_style: "normal"
+        border: "Single-line input boundary or underline"
+      due_date_field:
+        label: "Due Date"
+        type: "Date input"
+        default_value: "Current date"
+        text_style: "normal"
+        border: "Single-line input boundary or underline"
+
+  action_buttons:
+    cancel_button:
+      label: "Cancel"
+      style:
+        text_style: "normal"
+        decoration: "Bracketed label"
+      function: "Closes the modal without saving changes"
+    save_button:
+      label: "Save"
+      style:
+        text_style: "reverse bold"
+        decoration: "Bracketed label"
+      function: "Saves the task and closes the modal"
+
+  styling_details:
+    hierarchy:
+      modal_title: "bold"
+      field_labels: "bold"
+      field_values: "normal"
+      primary_action: "reverse bold"
+      secondary_action: "normal"
+    spacing: "One blank line between major sections and a single row between fields"
+    border_style: "Single-line box drawing characters where supported"
+
+  behavior_and_interactions:
+    close_icon:
+      function: "Closes the modal without saving"
+    cancel_button:
+      function: "Closes the modal without saving"
+    save_button:
+      function: "Validates inputs, saves task, and closes modal"
+    input_fields:
+      behavior: "Standard input and date picker functionality"
