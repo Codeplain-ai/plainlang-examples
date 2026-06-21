@@ -1,3 +1,9 @@
+# Task Manager (Python/Textual)
+
+A terminal-based task manager app built with Python and Textual, letting you view, add, and delete tasks from a keyboard-driven TUI.
+
+![Task Manager (Python/Textual)](python-taskmgr-textual.png)
+
 # How to render the example
 
 You can run the example with the `codeplain` command:
