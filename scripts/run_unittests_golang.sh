@@ -9,7 +9,9 @@ if [ -z "$1" ]; then
   exit $UNRECOVERABLE_ERROR_EXIT_CODE
 fi
 
-GO_BUILD_SUBFOLDER=".tmp/$1"
+GO_BUILD_SUBFOLDER="/tmp/go_$(basename "$1")"
+
+trap 'rm -rf "$GO_BUILD_SUBFOLDER"' EXIT
 
 if [ "${VERBOSE:-}" -eq 1 ] 2>/dev/null; then
   printf "Preparing Go build subfolder: $GO_BUILD_SUBFOLDER\n"
@@ -37,6 +39,7 @@ cp -R $1/* $GO_BUILD_SUBFOLDER
 cd "$GO_BUILD_SUBFOLDER" 2>/dev/null
 
 if [ $? -ne 0 ]; then
+  clear
   printf "Error: Go build folder '$GO_BUILD_SUBFOLDER' does not exist.\n"
   exit $UNRECOVERABLE_ERROR_EXIT_CODE
 fi

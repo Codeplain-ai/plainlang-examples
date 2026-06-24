@@ -1,4 +1,5 @@
 #!/usr/bin/env pwsh
+
 $ErrorActionPreference = 'Stop'
 
 $UNRECOVERABLE_ERROR_EXIT_CODE = 69
@@ -32,7 +33,13 @@ if (Get-Command python3 -ErrorAction SilentlyContinue) {
 
 $current_dir = Get-Location
 
-$PYTHON_BUILD_SUBFOLDER = ".tmp/$BuildFolder"
+# Resolve conformance tests folder to an absolute path so it can be used
+# from the build subfolder (where we'll Push-Location to next).
+if (-not [System.IO.Path]::IsPathRooted($ConformanceTestsFolder)) {
+    $ConformanceTestsFolder = Join-Path $current_dir $ConformanceTestsFolder
+}
+
+$PYTHON_BUILD_SUBFOLDER = Join-Path ([System.IO.Path]::GetTempPath()) "python_$(Split-Path $BuildFolder -Leaf)"
 
 if ($env:VERBOSE -eq "1") {
     Write-Host "Preparing Python build subfolder: $PYTHON_BUILD_SUBFOLDER"
@@ -68,8 +75,12 @@ try {
     # Execute all Python conformance tests in the build folder
     Write-Host "Running Python conformance tests...`n"
 
-    $output = & $PYTHON_CMD -m unittest discover -b -s "$current_dir/$ConformanceTestsFolder" 2>&1 | Out-String
+    # Temporarily allow stderr output without throwing (Python unittest writes progress to stderr)
+    # ForEach-Object converts ErrorRecord objects (from stderr) to plain strings to avoid verbose error formatting
+    $ErrorActionPreference = 'Continue'
+    $output = & $PYTHON_CMD -m unittest discover -b -s $ConformanceTestsFolder 2>&1 | ForEach-Object { if ($_ -is [System.Management.Automation.ErrorRecord]) { $_.Exception.Message } else { $_ } } | Out-String
     $exit_code = $LASTEXITCODE
+    $ErrorActionPreference = 'Stop'
 
     # Echo the original output
     Write-Host $output
@@ -84,4 +95,7 @@ try {
     exit $exit_code
 } finally {
     Pop-Location
+    if (Test-Path $PYTHON_BUILD_SUBFOLDER) {
+        Remove-Item -Path $PYTHON_BUILD_SUBFOLDER -Recurse -Force -ErrorAction SilentlyContinue
+    }
 }

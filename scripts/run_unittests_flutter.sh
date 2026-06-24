@@ -17,7 +17,7 @@ current_dir=$(pwd)
 
 current_dir=$(pwd)
 SOURCE_FOLDER=$1
-BUILD_SUBFOLDER=.tmp/flutter_build_unittests
+BUILD_SUBFOLDER="/tmp/flutter_build_unittests_$(basename "$1")"
 
 echo "Current directory: $current_dir"
 echo "Source folder: $SOURCE_FOLDER"
