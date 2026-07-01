@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -49,7 +52,41 @@ jobs:
           zip -r "${REPO_ROOT}/plainlang-examples-windows-${{ github.run_number }}.zip" . -x "*.DS_Store"
           echo "✓ plainlang-examples-windows-${{ github.run_number }}.zip built"
 
+      - name: Diagnose R2 credentials
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+        run: |
+          echo "== Secret sanity (values masked; lengths only) =="
+          echo "AWS_ACCESS_KEY_ID length: ${#AWS_ACCESS_KEY_ID}"
+          echo "AWS_SECRET_ACCESS_KEY length: ${#AWS_SECRET_ACCESS_KEY}"
+          echo "R2_ENDPOINT length: ${#R2_ENDPOINT}"
+          echo "R2_BUCKET length: ${#R2_BUCKET}"
+          echo "R2_ENDPOINT starts with https: $(case "$R2_ENDPOINT" in https://*) echo yes;; *) echo NO;; esac)"
+          echo "R2_BUCKET has s3:// prefix (should be NO): $(case "$R2_BUCKET" in s3://*) echo YES;; *) echo no;; esac)"
+          echo "R2_BUCKET has slash (should be no): $(case "$R2_BUCKET" in */*) echo YES;; *) echo no;; esac)"
+
+          echo "== aws sts get-caller-identity (expect failure on R2; informational) =="
+          aws sts get-caller-identity --endpoint-url "${R2_ENDPOINT}" || echo "(sts not supported by R2 — ignore)"
+
+          echo "== list buckets (tests whether creds are valid S3 creds at all) =="
+          aws s3 ls --endpoint-url "${R2_ENDPOINT}" || echo "FAILED: s3 ls (account level)"
+
+          echo "== list target bucket (tests read access + bucket scope) =="
+          aws s3 ls "s3://${R2_BUCKET}/" --endpoint-url "${R2_ENDPOINT}" || echo "FAILED: s3 ls on target bucket"
+
+          echo "== head-bucket (tests bucket existence + access) =="
+          aws s3api head-bucket --bucket "${R2_BUCKET}" --endpoint-url "${R2_ENDPOINT}" || echo "FAILED: head-bucket"
+
+          echo "== test PutObject with a tiny probe object =="
+          echo "probe" > /tmp/r2-probe.txt
+          aws s3 cp /tmp/r2-probe.txt "s3://${R2_BUCKET}/diagnostics/r2-probe.txt" \
+            --endpoint-url "${R2_ENDPOINT}" || echo "FAILED: PutObject probe"
+
       - name: Upload to Cloudflare R2
+        if: github.event_name != 'pull_request'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
