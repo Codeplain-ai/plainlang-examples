@@ -57,7 +57,7 @@ jobs:
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
         run: |
           aws s3 cp plainlang-examples-unix-${{ github.run_number }}.zip \
-            s3://${R2_BUCKET}/examples/plainlang-examples-unix-${{ github.run_number }}.zip \
+            s3://${R2_BUCKET}/examples/versions/plainlang-examples-unix-${{ github.run_number }}.zip \
             --endpoint-url "${R2_ENDPOINT}" \
             --content-type "application/zip"
           echo "✓ plainlang-examples-unix-${{ github.run_number }}.zip uploaded to R2"
@@ -69,7 +69,7 @@ jobs:
           echo "✓ plainlang-examples-unix.zip (latest) uploaded to R2"
 
           aws s3 cp plainlang-examples-windows-${{ github.run_number }}.zip \
-            s3://${R2_BUCKET}/examples/plainlang-examples-windows-${{ github.run_number }}.zip \
+            s3://${R2_BUCKET}/examples/versions/plainlang-examples-windows-${{ github.run_number }}.zip \
             --endpoint-url "${R2_ENDPOINT}" \
             --content-type "application/zip"
           echo "✓ plainlang-examples-windows-${{ github.run_number }}.zip uploaded to R2"
