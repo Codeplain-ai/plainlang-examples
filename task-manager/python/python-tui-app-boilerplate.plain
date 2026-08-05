@@ -1,0 +1,12 @@
+---
+import:
+  - python-tui-app-template
+---
+
+***functional specs***
+
+- ctrl+d should exit :App: gracefully.
+
+  ***acceptance tests***
+
+  - ctrl+d should exit :App: gracefully.
