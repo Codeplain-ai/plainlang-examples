@@ -1,6 +1,6 @@
 ---
 description: '"hello, world" in Plain (Go lang version)'
-import:
+imports:
   - golang-console-app-template # spec source available at https://github.com/Codeplain-ai/codeplain/blob/main/standard_template_library/
 ---
 

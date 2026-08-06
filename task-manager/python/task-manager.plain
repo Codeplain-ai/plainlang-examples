@@ -1,6 +1,6 @@
 ---
 description: 'A task manager application'
-import:
+imports:
   - python-tui-app-template # spec source available at https://github.com/Codeplain-ai/codeplain/blob/main/standard_template_library/
 ---
 

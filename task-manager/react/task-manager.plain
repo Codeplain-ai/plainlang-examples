@@ -1,8 +1,8 @@
 ---
-import:
-  - typescript-react-app-template # spec source available at https://github.com/Codeplain-ai/codeplain/blob/main/standard_template_library/
-requires:
+base:
   - typescript-react-app-boilerplate # spec source available at https://github.com/Codeplain-ai/codeplain/blob/main/standard_template_library/
+imports:
+  - typescript-react-app-template # spec source available at https://github.com/Codeplain-ai/codeplain/blob/main/standard_template_library/
 ---
 
 ***definitions***

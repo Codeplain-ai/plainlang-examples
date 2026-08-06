@@ -1,6 +1,6 @@
 ---
 description: 'Pong implemented in Dart with Flutter'
-import:
+imports:
   - flutter-mobile-app-template
 ---
 

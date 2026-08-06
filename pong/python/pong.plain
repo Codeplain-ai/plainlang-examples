@@ -1,6 +1,6 @@
 ---
 description: 'Pong implemented in Python with curses library'
-import:
+imports:
   - python-console-app-template # spec source available at https://github.com/Codeplain-ai/codeplain/blob/main/standard_template_library/
 ---
 
