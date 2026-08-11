@@ -5,8 +5,5 @@ import:
 
 ***functional specs***
 
-- ctrl+d should exit :App: gracefully.
-
-  ***acceptance tests***
-
-  - ctrl+d should exit :App: gracefully.
+# ctrl-d-exit
+ctrl+d should exit :App: gracefully.
