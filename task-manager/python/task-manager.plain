@@ -1,9 +1,9 @@
 ---
 description: 'A task manager application'
-import:
-  - python-tui-app-template # spec source available at https://github.com/Codeplain-ai/codeplain/blob/main/standard_template_library/
-requires:
+base:
   - python-tui-app-boilerplate # spec source available at https://github.com/Codeplain-ai/codeplain/blob/main/standard_template_library/
+imports:
+  - python-tui-app-template # spec source available at https://github.com/Codeplain-ai/codeplain/blob/main/standard_template_library/
 ---
 
 ***definitions***
