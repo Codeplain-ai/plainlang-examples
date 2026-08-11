@@ -1,0 +1,33 @@
+---
+module: python-tui-app-boilerplate
+func_id: ctrl-d-exit
+---
+
+***conformance tests***
+
+# exit-on-ctrl-d
+Pressing ctrl+d while :App: is running terminates it gracefully.
+- :App: is running in a pseudo-terminal with an empty :TaskList:.
+- ctrl+d is sent to the terminal.
+- The process exits with status 0 within 5 seconds and the terminal is restored to its normal state.
+
+# ctrl-d-ignored-in-modal
+Scenario: ctrl+d is ignored while a modal input has focus
+  Given :App: is running in a pseudo-terminal
+  And the add-task modal is open with the name field focused
+  When ctrl+d is sent to the terminal
+  Then :App: keeps running
+  And the modal stays open
+
+# ctrl-d-exits-with-populated-list
+description: Pressing ctrl+d exits :App: gracefully even when :TaskList: contains items.
+given:
+  - :App: is running in a pseudo-terminal
+  - :TaskList: contains two tasks
+when:
+  - ctrl+d is sent to the terminal
+then:
+  - the process exits with status 0 within 5 seconds
+  - the terminal is restored to its normal state
+
+***acceptance tests***
