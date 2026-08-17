@@ -4,6 +4,14 @@ A terminal-based task manager app built with Python and Textual, letting you vie
 
 ![Task Manager (Python/Textual)](python-taskmgr-textual.png)
 
+# Prerequisites
+
+The `pexpect` and `pyte` packages need to be installed for the example to run:
+
+```bash
+pip install pexpect pyte
+```
+
 # How to render the example
 
 You can run the example with the `codeplain` command:
